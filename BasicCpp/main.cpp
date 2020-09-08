@@ -5,6 +5,8 @@ using namespace std;
 void lastDigitSquare();
 void getInverseNo();
 void getSumProdDivisors();
+void divisorsMa();
+void getBestUnit();
 
 // ------------------------------------------
 // main(): Everything starts here
@@ -21,6 +23,8 @@ int main (int argc, char* argv[]) {
         cout << "1. Get square of last digit " << endl;
         cout << "2. Get inverse no for digits avg < 5" << endl;
         cout << "3. Get sum and prod for divisors of a no" << endl;
+        cout << "4. Get the Ma of the divisors" << endl;
+        cout << "5. Units profit" << endl;
         cout << "0. Exit" << endl;
         cout << "=================================" << endl;
         cout << " Choose: ";
@@ -40,6 +44,13 @@ int main (int argc, char* argv[]) {
             getSumProdDivisors();
             break; 
 
+        case 4:
+            divisorsMa();
+            break; 
+
+        case 5:
+            getBestUnit();
+            break;     
 
         case 0:
             return 0;
@@ -113,7 +124,7 @@ void getInverseNo(){
     }
 }
 // ------------------------------------------
-// Reads an int n and optains its divisors
+// Reads an int n and obtains its divisors
 // Prints the sum and prod of its divisors
 // If no divisor prints a messange
 // ------------------------------------------
@@ -142,4 +153,106 @@ void getSumProdDivisors() {
     }
         
     
+}
+// ------------------------------------------
+// Reads an int n and obtains its divisors
+// Prints the Ma of the divisors between a and b
+// If no divisor prints a messange
+// ------------------------------------------
+void divisorsMa() {
+    unsigned int n, a, b, x;
+    unsigned int ma = 0;
+    x = 0;
+    cout << "Input 3 numbers: ";
+    cin >> n >> a >> b;
+
+    for (unsigned int i = 2; i <= n/2; i++) {
+        if (n % i == 0)
+        {
+           if (a < i && i < b)
+           {
+               ma += i;
+               x++;
+           }
+           
+        } 
+        
+    }
+    if (x > 0)
+        cout << ma / x << endl;
+    else
+    {
+        cout << "The no doesn't have any divisors."<< endl;
+    }
+    
+
+}
+// ------------------------------------------
+// A company has a no n of units (1 < n < 5)
+// Each unit reported its profit for Q1, Q2, Q3, Q4
+// Dysplays the best unit for quorter q
+// ------------------------------------------
+void getBestUnit() {
+    unsigned int n, q;
+    cout << "Input the no of units(1-5): ";
+    cin >> n;
+
+    int q1[5], q2[5], q3[5], q4[5];
+    for (int i = 0; i < n; i++)
+    {
+        cout << i + 1<< " Input profit Q1: ";
+        cin >> q1[i];
+        cout << i + 1<< " Input profit Q2: ";
+        cin >> q2[i];
+        cout << i + 1<< " Input profit Q3: ";
+        cin >> q3[i];
+        cout << i + 1<< " Input profit Q4: ";
+        cin >> q4[i];
+    }
+    cout << endl << "Input quarter(1-4): ";
+    cin >> q;
+    int max = 0;
+    switch (q)
+    {
+    case 1:
+        for (int i = 0; i < n; i++)
+        {
+            if(max < q1[i])
+                max = q1[i];
+        }
+        
+        break;
+    
+    case 2:
+        for (int i = 0; i < n; i++)
+        {
+            if(max < q2[i])
+                max = q2[i];
+        }
+        
+        break;
+
+    case 3:
+        for (int i = 0; i < n; i++)
+        {
+            if(max < q3[i])
+                max = q3[i];
+        }
+        
+        break;
+
+    case 4:
+        for (int i = 0; i < n; i++)
+        {
+            if(max < q4[i])
+                max = q4[i];
+        }
+        
+        break;        
+
+    default:
+        break;
+    }
+    
+    cout << "The most proditable on Q"<< q << " is " << max << endl;
 }
